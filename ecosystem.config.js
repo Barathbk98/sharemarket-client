@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: 'client',
-    script: './src/App.js',
+    script: './node_modules/react-scripts/scripts/start.js',
 
     // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
     args: 'one two',
