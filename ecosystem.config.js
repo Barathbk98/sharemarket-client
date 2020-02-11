@@ -1,10 +1,10 @@
 module.exports = {
   apps : [{
     name: 'client',
-    script: './node_modules/react-scripts/scripts/start.js',
-
+    script: 'npx',
+    interpreter: "none",
+    args: "serve -p 3000 -T",
     // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
-    args: 'one two',
     instances: 1,
     autorestart: true,
     watch: false,
