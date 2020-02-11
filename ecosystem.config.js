@@ -1,8 +1,7 @@
 module.exports = {
   apps : [{
     name: 'client',
-    script: 'npm',
-    args      : 'run start:production',
+    script: 'app.js',
 
     // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
     args: 'one two',
