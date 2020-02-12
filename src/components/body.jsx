@@ -44,7 +44,7 @@ export default class body extends Component {
 
     fetchdata = () =>{
       this.setState({loaded : false})
-      axios.post("http://localhost:5000/fetch",{id : this.state.search})
+      axios.post("api/fetch",{id : this.state.search})
       .then((response)=>{
         console.log(response)
         response.data.data.map((data)=>{

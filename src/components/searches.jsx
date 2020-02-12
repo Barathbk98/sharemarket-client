@@ -24,7 +24,7 @@ export default class searches extends Component {
 
     dropdown = (e) =>{
         this.handlechange(e);
-        axios.get(`http://localhost:5000/getid?id=${e.target.value}`)
+        axios.get(`api/getid?id=${e.target.value}`)
         .then((response)=>{
             this.setState({open : true ,searches : response.data.data})
         })
@@ -43,7 +43,7 @@ export default class searches extends Component {
         if(this.state.id =="" && this.state.value == "")
             swal("Sorry search some id or value",{icon : "warning"})
         else {
-            axios.get(`http://localhost:5000/search?id=${this.state.id}&value=${this.state.value}&size=50&from=0`)
+            axios.get(`api/search?id=${this.state.id}&value=${this.state.value}&size=50&from=0`)
             .then((response)=>{
                 console.log(response.data.data);
                 this.setState({data : response.data.data});
@@ -53,7 +53,7 @@ export default class searches extends Component {
 
     infinitescroll = () =>{
         let page = this.state.page+1;
-        axios.get(`http://localhost:5000/search?id=${this.state.id}&value=${this.state.value}&size=50&from=${page}`)
+        axios.get(`api/search?id=${this.state.id}&value=${this.state.value}&size=50&from=${page}`)
             .then((response)=>{
                 let data = response.data.data;
                 this.setState({data:[...this.state.data,...data]})
