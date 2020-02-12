@@ -46,6 +46,9 @@ export default class body extends Component {
       this.setState({loaded : false})
       axios.post("api/fetch",{id : this.state.search})
       .then((response)=>{
+        if(response.data.success==false){
+          alert("Something went wrong")
+        } else {
         console.log(response)
         response.data.data.map((data)=>{
           console.log("doing");
@@ -56,7 +59,9 @@ export default class body extends Component {
         swal(`Successfully fetched ${response.data.data.length} data`,{
           icon: "success"
         })
+      }
       })
+    
     }
 
     redirect = () =>{
