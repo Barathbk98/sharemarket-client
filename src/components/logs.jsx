@@ -110,9 +110,10 @@ export default class logs extends Component {
     tablefetch = () => {
         axios.get(`api/logs?limit=${this.state.limit}&page=${this.state.page}`)
         .then((response)=>{
-            console.log(response);
-            console.log([...this.state.data,response.data.data])
-            // this.setState({data : [...this.state.data,response.data.data], page : this.state.page+1})
+            let data = response.data.data;
+            // console.log(response);
+            // console.log([...this.state.data,response.data.data])
+            this.setState({data : [...this.state.data,...data], page : this.state.page+1})
         })
     } 
 
