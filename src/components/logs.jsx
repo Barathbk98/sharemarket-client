@@ -78,15 +78,15 @@ export default class logs extends Component {
                 option1 : {label : option2},
                 series2,
             })
-            this.refs.myscroll.addEventListener("scroll", () => {
-                if (
-                  this.refs.myscroll.scrollTop + this.refs.myscroll.clientHeight >=
-                  this.refs.myscroll.scrollHeight
-                ) {
-                  this.tablefetch();
-                }
-              });
         })
+
+        this.refs.myscroll.addEventListener("scroll", () => {
+            if (
+              this.refs.table.getBoundingClientRect().bottom - this.refs.myscroll.clientHeight <= 10
+            ) {
+              this.tablefetch();
+            }
+          });
 
         axios.get(`api/datehits?type=${this.state.type}`)
         .then((response)=>{
@@ -169,7 +169,7 @@ export default class logs extends Component {
                 <Button variant="contained" onClick={()=>this.setlimit()} color="primary">SET</Button>
                 <button id="searchpage" onClick={()=>this.redirect()}>Main Page</button>
                 <div id="logtable" ref="myscroll">
-                    <table>
+                    <table ref="table">
                         <tr id="colorhead">
                             <th>CLEINT</th>
                             <th>METHOD</th>
