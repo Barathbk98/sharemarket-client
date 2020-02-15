@@ -160,7 +160,7 @@ export default class logs extends Component {
                 <button id="searchpage" onClick={()=>this.redirect()}>Main Page</button>
                 <div id="logtable">
                 <InfiniteScroll
-                loadMore = {()=>this.tablefetch}
+                loadMore = {()=>this.tablefetch()}
                 loader={<div className="loader"> Loading... </div>}
                 >
                     <table>
