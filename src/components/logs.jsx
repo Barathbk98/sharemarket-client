@@ -91,7 +91,6 @@ export default class logs extends Component {
         axios.get(`api/datehits?type=${this.state.type}`)
         .then((response)=>{
             let x;
-            console.log(response.data);
             let value=[]
             response.data.data.map((data)=>{
                 x= moment(data.key_as_string).format("HH:mma")
@@ -111,7 +110,9 @@ export default class logs extends Component {
     tablefetch = () => {
         axios.get(`api/logs?limit=${this.state.limit}&page=${this.state.page}`)
         .then((response)=>{
-            this.setState({data : [...this.state.data,response.data.data], page : this.state.page+1})
+            console.log(data);
+            console.log([...this.state.data,response.data.data])
+            // this.setState({data : [...this.state.data,response.data.data], page : this.state.page+1})
         })
     } 
 
@@ -131,7 +132,6 @@ export default class logs extends Component {
         axios.get(`api/logsearch?search=${this.state.search}&limit=${this.state.limit}`)
         .then((response)=>{
             this.setState({data : response.data.data})
-            console.log(response.data);
         })
     }
 
@@ -160,7 +160,6 @@ export default class logs extends Component {
     }
 
     render() {
-        console.log(this.state.series3)
         return (
             <div className="logs">
                 <TextField placeholder="Search" name="search" onChange={(e)=>this.limit(e)}></TextField>
