@@ -141,6 +141,7 @@ p{
 
 #table{
   margin-left: 100px;
+  max-width: 1000px;
 }
 
 #logtable{
