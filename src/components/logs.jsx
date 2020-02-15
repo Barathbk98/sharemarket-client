@@ -60,22 +60,32 @@ export default class logs extends Component {
         this.tablefetch();
         axios.get(`api/statuscount`)
         .then((response)=>{
-            let series1 
-            console.log(response.data.data)
+            let series1 =[];
+            let option1 = [];
+            let series2 =[];
+            let option2 = [];            console.log(response.data.data)
             response.data.data.code_count.buckets.map((data)=>{
-                this.state.option1.labels.push(data.key)
-                this.state.series1.push(data.doc_count)
+                option1.push(data.key)
+                series1.push(data.doc_count)
             })
             response.data.data.agent_count.buckets.map((data)=>{
-                this.state.option2.labels.push(data.key)
-                this.state.series2.push(data.doc_count)
+                option2.push(data.key)
+                series2.push(data.doc_count)
             })
             this.setState({
-                option1 : this.state.option1,
-                series1: this.state.series1,
-                option2 : this.state.option2,
-                series2: this.state.series2,
+                option1 : {label : option1},
+                series1,
+                option1 : {label : option2},
+                series2,
             })
+            this.refs.myscroll.addEventListener("scroll", () => {
+                if (
+                  this.refs.myscroll.scrollTop + this.refs.myscroll.clientHeight >=
+                  this.refs.myscroll.scrollHeight
+                ) {
+                  this.tablefetch();
+                }
+              });
         })
 
         axios.get(`api/datehits?type=${this.state.type}`)
@@ -158,11 +168,7 @@ export default class logs extends Component {
                 <label>LIMIT :</label><TextField type="Number" name="limit" onChange={(e)=>this.limit(e)} value={this.state.limit} inputProps={{ min:"10",max:"100" ,step:"10"}}/>
                 <Button variant="contained" onClick={()=>this.setlimit()} color="primary">SET</Button>
                 <button id="searchpage" onClick={()=>this.redirect()}>Main Page</button>
-                <div id="logtable">
-                <InfiniteScroll
-                loadMore = {()=>this.tablefetch()}
-                loader={<div className="loader"> Loading... </div>}
-                >
+                <div id="logtable" ref="myscroll">
                     <table>
                         <tr id="colorhead">
                             <th>CLEINT</th>
@@ -180,7 +186,6 @@ export default class logs extends Component {
                             </tr>)
                         })}
                     </table>
-                    </InfiniteScroll>
                 </div>
                 <div id="piecharts">
                 <Chart className="pie" options={this.state.option1} series={this.state.series1} type="pie" height={370} width={350}/>
