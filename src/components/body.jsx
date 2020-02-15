@@ -64,8 +64,8 @@ export default class body extends Component {
     
     }
 
-    redirect = () =>{
-      this.props.history.push("/searches");
+    redirect = (e) =>{
+      this.props.history.push(`/${e.target.name}`);
     }
 
     render() {
@@ -77,7 +77,8 @@ export default class body extends Component {
           <div className="padding">
            <input id="inputbox" autoComplete="off" placeholder="Search" onChange={((e)=>this.handleval(e))}></input>
            <button id="search" onClick={()=>this.fetchdata()}><img id="searchimg" src={Search}></img></button>
-           <button id="searchpage" onClick={()=>this.redirect()}>Search Page</button>
+           <button id="searchpage" name="searches" onClick={(e)=>this.redirect(e)}>Search Page</button>
+           <button id="searchpage" name="logs" onClick={(e)=>this.redirect(e)}>Logs page</button>
            <Loader loaded = {this.state.loaded}>
              <Chart className="chart" options={this.state.options} series={this.state.series} type="line" height={350} width={1000}/>
              <Chart className="chart" options={this.state.options1} series={this.state.series1} type="candlestick" height={350} width={1000}/>

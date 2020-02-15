@@ -55,7 +55,7 @@
   background-color: blueviolet;
   color: aliceblue;
   border-radius: 1rem;
-  margin-left: 300px;
+  margin-left: 100px;
 }
 
 #mainpage{
@@ -68,16 +68,53 @@
 }
 
 table{
-  box-shadow: 0px 5px 20px -5px rgba(0,0,0,0.75);
-  margin-top: 20px;
+  /* box-shadow: 0px 5px 20px -5px rgba(0,0,0,0.75); */
+  /* margin-top: 20px; */
 }
 
 .chart{
   background-color: #fffffe;
   border-radius: 2rem;
+  width: fit-content;
   width: 1020px;
   box-shadow: 0px 5px 20px -5px rgba(0,0,0,0.1);
   margin-top: 30px;
+}
+
+.linechart{
+  background-color: #fffffe;
+  border-radius: 2rem;
+  width: fit-content;
+  width: 1020px;
+  box-shadow: 0px 5px 20px -5px rgba(0,0,0,0.1);
+  margin-top: 30px;
+  margin-left: 200px;
+  margin-bottom: 100px;
+}
+
+.pie{
+  background-color: #eee;
+  border-radius: 2rem;
+  width: fit-content;
+  /* width: 1020px; */
+  box-shadow: 0px 5px 20px -5px rgba(0,0,0,0.1);
+  margin-top: 30px;
+  margin-left: 300px;
+}
+
+#piecharts{
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.pie2{
+  background-color: #eee;
+  border-radius: 2rem;
+  width: fit-content;
+  /* width: 1020px; */
+  box-shadow: 0px 5px 20px -5px rgba(0,0,0,0.1);
+  margin-top: 30px;
+  margin-left: 50px;
 }
 
 p{
@@ -104,6 +141,33 @@ p{
 
 #table{
   margin-left: 100px;
+}
+
+#logtable{
+  box-shadow: 0px 5px 20px -5px rgba(0,0,0,0.75);
+  margin-top: 20px;
+  border-radius: 1rem;
+  margin-left: 20rem;
+  width: fit-content;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.logs{
+  padding-top: 10px;
+  text-align: center;
+}
+
+label{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+th{
+  background-color: rgb(179, 144, 212);
+  border-bottom: 5px solid blueviolet;
+  position: sticky;
+  top:0;
 }
 
 .sidenav {
@@ -155,9 +219,7 @@ table{
 }
 
 #colorhead{
-  background-color: rgb(179, 144, 212);
   color: white;
-  border-bottom: 5px solid blueviolet;
   color: black;
 }
 /*
