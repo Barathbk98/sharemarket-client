@@ -33,6 +33,9 @@ export default class logs extends Component {
             series2:[],
             type:"day",
             option3: {
+                stroke: {
+                    curve: 'smooth',
+                  },
                 title: {
                     text: "Hits chart",
                     align : "centre"
@@ -93,7 +96,7 @@ export default class logs extends Component {
             let x;
             let value=[]
             response.data.data.map((data)=>{
-                x= moment(data.key_as_string).format("HH:mma")
+                x= moment(data.key_as_string).format("hh:mma")
                 this.setState({option3 : {xaxis : {min : response.data.start, max: response.data.end}}})
                 value.push({x,y : data.doc_count})
             })
@@ -147,7 +150,7 @@ export default class logs extends Component {
                 let x;
                 response.data.data.map((data)=>{
                     if(this.state.type==="day"){
-                        x= moment(data.key_as_string).format("HH:mma")
+                        x= moment(data.key_as_string).format("hh:mma")
                     } else {
                         x= moment(data.key_as_string).format("DD MMM")
                     }
