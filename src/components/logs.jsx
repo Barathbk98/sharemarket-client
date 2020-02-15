@@ -4,6 +4,7 @@ import {TextField,Button} from '@material-ui/core'
 import {ToggleButton,ToggleButtonGroup} from '@material-ui/lab'
 import Chart from 'react-apexcharts'
 import moment from 'moment'
+import InfiniteScroll from "react-infinite-scroller"
 
 export default class logs extends Component {
 
@@ -13,6 +14,7 @@ export default class logs extends Component {
             data : [],
             search: "",
             limit: 20,
+            page:0,
             option1:{
                 title:{
                     text: "Status Chart",
@@ -37,6 +39,7 @@ export default class logs extends Component {
                 },
                 xaxis: {
                     type: "date",
+                    min: "",
                     labels : {
                         datetimeFormatter: {
                             year: 'yyyy',
@@ -54,12 +57,10 @@ export default class logs extends Component {
     }
 
     componentDidMount = () => {
-        axios.get(`api/logs?limit=${this.state.limit}`)
-        .then((response)=>{
-            this.setState({data : response.data.data})
-        })
+        this.tablefetch();
         axios.get(`api/statuscount`)
         .then((response)=>{
+            let series1 
             console.log(response.data.data)
             response.data.data.code_count.buckets.map((data)=>{
                 this.state.option1.labels.push(data.key)
@@ -69,7 +70,14 @@ export default class logs extends Component {
                 this.state.option2.labels.push(data.key)
                 this.state.series2.push(data.doc_count)
             })
+            this.setState({
+                option1 : this.state.option1,
+                series1: this.state.series1,
+                option2 : this.state.option2,
+                series2: this.state.series2,
+            })
         })
+
         axios.get(`api/datehits?type=${this.state.type}`)
         .then((response)=>{
             let x;
@@ -77,7 +85,7 @@ export default class logs extends Component {
             let value=[]
             response.data.data.map((data)=>{
                 x= moment(data.key_as_string).format("HH:mma")
-                this.setState({option3 : {label : [response.data.start,response.data.start]}})
+                this.setState({option3 : {min : response.data.start, max: response.data.end}})
                 value.push({x,y : data.doc_count})
             })
             this.setState({series3 : [{data: value}]})
@@ -90,8 +98,16 @@ export default class logs extends Component {
         this.props.history.push("../")
     }
 
-    setlimit = () =>{
-        axios.get(`api/logs?limit=${this.state.limit}`)
+    tablefetch = () => {
+        axios.get(`api/logs?limit=${this.state.limit}&page=${this.state.page}`)
+        .then((response)=>{
+            this.setState({data : response.data.data, page : this.state.page+1})
+        })
+    } 
+
+    setlimit = async() =>{
+        await this.setState({page : 0})
+        await axios.get(`api/logs?limit=${this.state.limit}&page=${this.state.page}`)
         .then((response)=>{
             this.setState({data : response.data.data})
         })
@@ -123,6 +139,7 @@ export default class logs extends Component {
                     } else {
                         x= moment(data.key_as_string).format("DD MMM")
                     }
+                    this.setState({option3 : {min : response.data.start, max: response.data.end}})
                     value.push({x,y : data.doc_count})
                 })
                 this.setState({series3 : [{data: value}]})
@@ -142,6 +159,10 @@ export default class logs extends Component {
                 <Button variant="contained" onClick={()=>this.setlimit()} color="primary">SET</Button>
                 <button id="searchpage" onClick={()=>this.redirect()}>Main Page</button>
                 <div id="logtable">
+                <InfiniteScroll
+                loadMore = {()=>this.tablefetch}
+                loader={<div className="loader"> Loading... </div>}
+                >
                     <table>
                         <tr id="colorhead">
                             <th>CLEINT</th>
@@ -159,6 +180,7 @@ export default class logs extends Component {
                             </tr>)
                         })}
                     </table>
+                    </InfiniteScroll>
                 </div>
                 <div id="piecharts">
                 <Chart className="pie" options={this.state.option1} series={this.state.series1} type="pie" height={370} width={350}/>
