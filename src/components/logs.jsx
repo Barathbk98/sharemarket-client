@@ -94,7 +94,7 @@ export default class logs extends Component {
             let value=[]
             response.data.data.map((data)=>{
                 x= moment(data.key_as_string).format("HH:mma")
-                this.setState({option3 : {min : response.data.start, max: response.data.end}})
+                this.setState({option3 : {xaxis : {min : response.data.start, max: response.data.end}}})
                 value.push({x,y : data.doc_count})
             })
             this.setState({series3 : [{data: value}]})
