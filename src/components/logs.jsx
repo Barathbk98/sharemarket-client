@@ -54,6 +54,7 @@ export default class logs extends Component {
                 },
             },
             series3:[{
+                name: "Hits",
                 data: []
             }]
         }
