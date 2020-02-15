@@ -81,8 +81,9 @@ export default class logs extends Component {
         })
 
         this.refs.myscroll.addEventListener("scroll", () => {
+            console.log(this.refs.table.getBoundingClientRect().bottom - this.refs.myscroll.getBoundingClientRect().bottom)
             if (
-              this.refs.table.getBoundingClientRect().bottom - this.refs.myscroll.clientHeight <= 10
+              (this.refs.table.getBoundingClientRect().bottom - this.refs.myscroll.getBoundingClientRect().bottom) <= 10
             ) {
               this.tablefetch();
             }
@@ -108,6 +109,7 @@ export default class logs extends Component {
     }
 
     tablefetch = () => {
+
         axios.get(`api/logs?limit=${this.state.limit}&page=${this.state.page}`)
         .then((response)=>{
             let data = response.data.data;
