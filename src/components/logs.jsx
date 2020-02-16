@@ -40,6 +40,15 @@ export default class logs extends Component {
                     text: "Hits chart",
                     align : "centre"
                 },
+                markers: {
+                    size: 4,
+                    colors: ["#FFA41B"],
+                    strokeColors: "#fff",
+                    strokeWidth: 2,
+                    hover: {
+                      size: 7,
+                    }
+                  },
                 xaxis: {
                     type: "date",
                     min: "",
@@ -152,7 +161,7 @@ export default class logs extends Component {
                 response.data.data.map((data)=>{
                     if(this.state.type==="day"){
                         x= moment(data.key_as_string).format("hh:mma")
-                    } else if(this.state.type==="day") {
+                    } else if(this.state.type==="month") {
                         x= moment(data.key_as_string).format("DD MMM")
                     } else {
                         x= moment(data.key_as_string).format("MMM YYYY")
