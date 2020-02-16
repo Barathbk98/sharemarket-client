@@ -152,8 +152,10 @@ export default class logs extends Component {
                 response.data.data.map((data)=>{
                     if(this.state.type==="day"){
                         x= moment(data.key_as_string).format("hh:mma")
-                    } else {
+                    } else if(this.state.type==="day") {
                         x= moment(data.key_as_string).format("DD MMM")
+                    } else {
+                        x= moment(data.key_as_string).format("MMM YYYY")
                     }
                     this.setState({option3 : {min : response.data.start, max: response.data.end}})
                     value.push({x,y : data.doc_count})
@@ -203,7 +205,7 @@ export default class logs extends Component {
                     >
                     <ToggleButton value="day">Day</ToggleButton>
                     <ToggleButton value="month" color={this.state.month}>Month</ToggleButton>
-                    {/* <ToggleButton value="year" color={this.state.year}>Year</ToggleButton> */}
+                    <ToggleButton value="year" color={this.state.year}>Year</ToggleButton>
                 </ToggleButtonGroup>
                 <Chart className="linechart" options={this.state.option3} series={this.state.series3} type="line" height={350} width={1000}/>
             </div>
