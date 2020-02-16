@@ -40,6 +40,18 @@ export default class logs extends Component {
                     text: "Hits chart",
                     align : "centre"
                 },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                      shade: 'dark',
+                      gradientToColors: [ '#FDD835'],
+                      shadeIntensity: 1,
+                      type: 'horizontal',
+                      opacityFrom: 1,
+                      opacityTo: 1,
+                      stops: [0, 100, 100, 100]
+                    },
+                  },
                 markers: {
                     size: 4,
                     colors: ["#FFA41B"],
