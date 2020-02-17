@@ -98,9 +98,9 @@ export default class logs extends Component {
                 series2.push(data.doc_count)
             })
             this.setState({
-                option1 : {label : option1},
+                option1 : {labels : option1},
                 series1,
-                option1 : {label : option2},
+                option2 : {labels : option2},
                 series2,
             })
         })
