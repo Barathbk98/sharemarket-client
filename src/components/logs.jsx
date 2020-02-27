@@ -4,7 +4,8 @@ import {TextField,Button} from '@material-ui/core'
 import {ToggleButton,ToggleButtonGroup} from '@material-ui/lab'
 import Chart from 'react-apexcharts'
 import moment from 'moment'
-import InfiniteScroll from "react-infinite-scroller"
+import swal from 'sweetalert'
+// import InfiniteScroll from "react-infinite-scroller"
 
 export default class logs extends Component {
 
@@ -124,7 +125,7 @@ export default class logs extends Component {
             })
             this.setState({series3 : [{data: value}]})
         }).catch((err)=>{
-            alert("something went wrong")
+            swal("something went wrong")
         })
     }
 
@@ -183,7 +184,7 @@ export default class logs extends Component {
                 })
                 this.setState({series3 : [{data: value}]})
             }).catch((err)=>{
-                alert("something went wrong");
+                swal("something went wrong");
             })
         }
     }

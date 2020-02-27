@@ -46,14 +46,15 @@ export default class body extends Component {
       this.setState({loaded : false})
       axios.post("api/fetch",{id : this.state.search})
       .then((response)=>{
-        if(response.data.success==false){
-          alert("Something went wrong")
+        if(response.data.success===false){
+          swal("Something went wrong")
         } else {
         console.log(response)
-        response.data.data.map((data)=>{
+        response.data.data.map((data) => {
           console.log("doing");
           this.state.series[0].data.push({x:data.date , y:data.value});
           this.state.series1[0].data.push({x:data.date , y:[data.open,data.high,data.low,data.close]});
+          return null;
         })
         this.setState({loaded : true , data: response.data.data})
         swal(`Successfully fetched ${response.data.data.length} data`,{
@@ -72,11 +73,11 @@ export default class body extends Component {
         return (
           <div>
             <div className="sidenav">
-              <img id="home" src={Homeimg}></img>
+              <img id="home" alt="" src={Homeimg}></img>
             </div>
           <div className="padding">
            <input id="inputbox" autoComplete="off" placeholder="Search" onChange={((e)=>this.handleval(e))}></input>
-           <button id="search" onClick={()=>this.fetchdata()}><img id="searchimg" src={Search}></img></button>
+           <button id="search" onClick={()=>this.fetchdata()}><img id="searchimg" alt="" src={Search}></img></button>
            <button id="searchpage" name="searches" onClick={(e)=>this.redirect(e)}>Search Page</button>
            <button id="searchpage" name="logs" onClick={(e)=>this.redirect(e)}>Logs page</button>
            <Loader loaded = {this.state.loaded}>

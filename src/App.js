@@ -9,6 +9,7 @@ import {createBrowserHistory} from 'history'
 function App() {
   return(
     <BrowserRouter>
+    <h1>OK This is a change</h1>
       <Route exact path="/" history={createBrowserHistory} component={Body}/>
       <Route exact path="/searches" history={createBrowserHistory} component={Searches}/>
       <Route exact path="/logs" history={createBrowserHistory} component={Logs}/>
