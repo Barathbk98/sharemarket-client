@@ -76,7 +76,7 @@ export default class body extends Component {
               <img id="home" alt="" src={Homeimg}></img>
             </div>
           <div className="padding">
-            <h1>Changes TESTING</h1>
+            <h1>Changes</h1>
            <input id="inputbox" autoComplete="off" placeholder="Search" onChange={((e)=>this.handleval(e))}></input>
            <button id="search" onClick={()=>this.fetchdata()}><img id="searchimg" alt="" src={Search}></img></button>
            <button id="searchpage" name="searches" onClick={(e)=>this.redirect(e)}>Search Page</button>
